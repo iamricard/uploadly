@@ -8,7 +8,9 @@
   "permissions": [
     "clipboardWrite",
     "contextMenus",
-    "https://api.imgur.com/"
+    "notifications",
+    "https://api.imgur.com/",
+    "http://i.imgur.com/"
   ],
 
   "icons": {
