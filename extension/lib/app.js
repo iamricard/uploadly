@@ -36,7 +36,7 @@ You may click on this notification to open the image in a new tab <3
   });
 }
 
-function handleClick({ srcUrl }, tab) {
+function handleAnonClick({ srcUrl }, tab) {
   chrome.notifications.create(srcUrl, {
     type: 'basic',
     iconUrl: 'icons/128.png',
@@ -58,7 +58,21 @@ function handleClick({ srcUrl }, tab) {
 }
 
 chrome.contextMenus.create({
-  title: 'Upload to imgur',
+  title: 'Imgur upload',
   contexts: ['image'],
-  onclick: handleClick
+  id: 'main'
+}, function createActions () {
+  chrome.contextMenus.create({
+    title: 'upload anonymously',
+    contexts: ['image'],
+    parentId: 'main',
+    onclick: handleAnonClick
+  })
+
+  chrome.contextMenus.create({
+    title: 'upload to your account (coming soon!)',
+    contexts: ['image'],
+    parentId: 'main',
+    enabled: false
+  })
 });
