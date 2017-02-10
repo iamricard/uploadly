@@ -1,2 +1,4 @@
+language: bash
+
 script:
-  ./publish
+  - ./publish
