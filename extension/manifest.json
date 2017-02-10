@@ -20,6 +20,6 @@
   },
 
   "background": {
-    "scripts": ["lib/app.js"]
+    "scripts": ["dist/app.js"]
   }
 }

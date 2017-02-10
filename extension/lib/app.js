@@ -1,5 +1,3 @@
-const CLIENT_ID = 'GET YOUR OWN!';
-
 const input = document.createElement('input');
 document.body.appendChild(input);
 
@@ -49,7 +47,7 @@ function handleClick({ srcUrl }, tab) {
 
   fetch('https://api.imgur.com/3/image', {
     method: 'POST',
-    headers: { Authorization: CLIENT_ID },
+    headers: { Authorization: `Client-ID ${process.env.CLIENT_ID}` },
     body: payload(srcUrl)
   })
     .then(response => response.json())

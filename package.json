@@ -1,0 +1,34 @@
+{
+  "name": "uploadly",
+  "version": "1.0.2",
+  "scripts": {
+    "prettier": "prettier --write --single-quote extension/**/*.js",
+    "clean": "rm -rf extension/dist && mkdir -p extension/dist",
+    "watch": "npm run clean && watchify -t localenvify extension/lib/app.js -o extension/dist/app.js -v",
+    "compile": "npm run clean && browserify extension/lib/app.js -o extension/dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcsole/uploadly.git"
+  },
+  "keywords": [],
+  "author": "Ricard Solé <ricardsolecasas@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rcsole/uploadly/issues"
+  },
+  "homepage": "https://github.com/rcsole/uploadly#readme",
+  "devDependencies": {
+    "browserify": "^14.0.0",
+    "dotenv": "^4.0.0",
+    "envify": "^4.0.0",
+    "localenvify": "^1.0.1",
+    "prettier": "^0.16.0",
+    "watchify": "^3.9.0"
+  },
+  "browserify": {
+    "transform": [
+      "envify"
+    ]
+  }
+}
