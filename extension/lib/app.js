@@ -46,7 +46,7 @@ function handleAnonClick({ srcUrl }, tab) {
 
   fetch('https://api.imgur.com/3/image', {
     method: 'POST',
-    headers: { Authorization: `Client-ID ${process.env.CLIENT_ID}` },
+    headers: { Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}` },
     body: payload(srcUrl)
   })
     .then(response => response.json())

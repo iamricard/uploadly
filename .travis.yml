@@ -1,4 +1,9 @@
 language: bash
 
+addons:
+  apt:
+    packages:
+      - jq
+
 script:
   - ./publish
