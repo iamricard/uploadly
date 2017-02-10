@@ -22,9 +22,8 @@ You may click on this notification to open the image in a new tab <3
 `;
 
   chrome.notifications.create(id, {
-    type: 'image',
-    iconUrl: 'icons/128.png',
-    imageUrl: `http://i.imgur.com/${id}m.jpg`,
+    type: 'basic',
+    iconUrl: `http://i.imgur.com/${id}m.jpg`,
     title: 'Image uploaded!',
     isClickable: true,
     message
