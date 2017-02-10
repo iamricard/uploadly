@@ -11,7 +11,10 @@ then
   exit 0
 fi
 
+echo ""
 echo "Publishing new version."
+echo "Requesting new Google Access Token."
+echo ""
 
 GOOGLE_ACCESS_TOKEN=`curl \
 -X POST \
@@ -24,17 +27,23 @@ rm -rf build && \
 mkdir build && \
 npm run compile && \
 zip -r build/pkg.zip extension && \
+echo "" && \
+echo "Uploading new version" &&
+echo "" && \
 curl \
 -H "Authorization: Bearer $GOOGLE_ACCESS_TOKEN" \
 -H "x-goog-api-version: 2" \
 -X PUT \
 -T "build/pkg.zip" \
 -v \
-https://www.googleapis.com/upload/chromewebstore/v1.1/items/$GOOGLE_APP_ID && \
+https://www.googleapis.com/upload/chromewebstore/v1.1/items/$GOOGLE_APP_ID 2>/dev/null | jq . && \
+echo "" && \
+echo "Publishing new version" && \
+echo "" && \
 curl \
 -H "Authorization: Bearer $GOOGLE_ACCESS_TOKEN"  \
 -H "x-goog-api-version: 2" \
 -H "Content-Length: 0" \
 -X POST \
 -v \
-https://www.googleapis.com/chromewebstore/v1.1/items/$GOOGLE_APP_ID/publish
+https://www.googleapis.com/chromewebstore/v1.1/items/$GOOGLE_APP_ID/publish 2>/dev/null | jq .
