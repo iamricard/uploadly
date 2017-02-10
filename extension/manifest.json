@@ -3,7 +3,7 @@
 
   "name": "uploadly",
   "description": "Allows you to upload images to imgur!",
-  "version": "1.0.3",
+  "version": "1.0.4",
 
   "permissions": [
     "clipboardWrite",
