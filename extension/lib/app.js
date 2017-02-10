@@ -42,37 +42,40 @@ function handleAnonClick({ srcUrl }, tab) {
     iconUrl: 'icons/128.png',
     title: 'Uploading image!',
     message: 'Please wait <3'
-  })
+  });
 
   fetch('https://api.imgur.com/3/image', {
     method: 'POST',
-    headers: { Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}` },
+    headers: { Authorization: 'Client-ID ' + process.env.IMGUR_CLIENT_ID },
     body: payload(srcUrl)
   })
     .then(response => response.json())
     .then(({ data }) => {
-      chrome.notifications.clear(srcUrl)
+      chrome.notifications.clear(srcUrl);
       copyToClipboard(data.link);
       notify(data);
     });
 }
 
-chrome.contextMenus.create({
-  title: 'Imgur upload',
-  contexts: ['image'],
-  id: 'main'
-}, function createActions () {
-  chrome.contextMenus.create({
-    title: 'upload anonymously',
+chrome.contextMenus.create(
+  {
+    title: 'Imgur upload',
     contexts: ['image'],
-    parentId: 'main',
-    onclick: handleAnonClick
-  })
+    id: 'main'
+  },
+  function createActions() {
+    chrome.contextMenus.create({
+      title: 'upload anonymously',
+      contexts: ['image'],
+      parentId: 'main',
+      onclick: handleAnonClick
+    });
 
-  chrome.contextMenus.create({
-    title: 'upload to your account (coming soon!)',
-    contexts: ['image'],
-    parentId: 'main',
-    enabled: false
-  })
-});
+    chrome.contextMenus.create({
+      title: 'upload to your account (coming soon!)',
+      contexts: ['image'],
+      parentId: 'main',
+      enabled: false
+    });
+  }
+);
