@@ -4,56 +4,66 @@
     <meta charset="utf-8">
     <title>uploadly</title>
 
-    <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style media="screen">
+      html * { box-sizing: border-box; }
+
       body {
         background: #F2F2F2;
         margin: 0;
       }
 
       #app {
-        max-width: 300px;
+        width: 300px;
         max-height: 300px;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: .5rem 0;
       }
 
-      a {
-        text-decoration: none;
-      }
+      a { text-decoration: none; }
 
       .media {
         display: flex;
         align-items: flex-start;
       }
 
-      .media-figure {
-        margin-right: .5rem;
-      }
-
-      .media-body {
-        flex: 1;
-      }
+      .media-figure { margin-right: .5rem; }
+      .media-body { flex: 1; }
 
       .upload {
         outline: none;
-        padding-top: 3px;
-        padding-bottom: 3px;
-        line-height: 24px;
+        margin: 3px 0;
+        padding: 0 .75rem;
+        line-height: 32px;
+        height: 32px;
         color: black;
+        width: 100%;
       }
 
       .upload:hover {
         background-color: #6F6F72;
         color: white;
       }
-
+      .upload .media-body { display: flex; }
       .upload img {
-        max-height: 24px;
+        max-height: 32px;
+      }
+
+      .action {
+        flex: auto;
+        cursor: pointer;
+        display: flex;
+      }
+      .action i {
+        line-height: 32px;
+        font-size: 18px;
+        margin-right: .5rem;
       }
     </style>
   </head>
   <body>
-    <div id="app" class="py1">
+    <div id="app">
     </div>
 
     <script src="dist/popup-bundle.js" charset="utf-8"></script>

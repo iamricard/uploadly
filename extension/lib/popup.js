@@ -1,28 +1,38 @@
+const bel = require('bel');
 const storage = require('./storage');
 const app = document.getElementById('app');
 
-const viewUpload = u => {
-  const el = document.createElement('a');
-  const thumbnail = document.createElement('img');
-  const title = document.createElement('div');
+const viewClipboard = () => bel`
+  <div class='action'>
+    <i class='material-icons'>content_copy</i>
+    Copy to Clipboard
+  </div>
+`;
 
-  el.classList.add('media');
-  el.classList.add('upload');
-  el.classList.add('px2');
-  thumbnail.classList.add('media-figure');
-  title.classList.add('media-body');
-  title.classList.add('truncate');
+const viewOpen = () => bel`
+  <div class='action'>
+    <i class="material-icons">open_in_new</i>
+    Open
+  </div>
+`;
 
-  el.href = u.link;
-  el.alt = `Open image ${u.id} on imgur`;
-  thumbnail.src = u.thumbnail;
-  title.innerHTML = u.id;
+const viewThumbnail = (title, src) => bel`
+  <img class='media-figure' src=${src} alt='Thumbnail for ${title}' />
+`;
 
-  el.appendChild(thumbnail);
-  el.appendChild(title);
+const viewBody = (text, src) => bel`
+  <div class='media-body'>
+    ${viewOpen()}
+    ${viewClipboard()}
+  </div>
+`;
 
-  return el;
-};
+const viewUpload = u => bel`
+  <div class='media upload'>
+    ${viewThumbnail(u.id, u.thumbnail)}
+    ${viewBody(u.id, u.link)}
+  </div>
+`;
 
 const render = uv => app.appendChild(uv);
 
