@@ -3,8 +3,59 @@
   <head>
     <meta charset="utf-8">
     <title>uploadly</title>
+
+    <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
+    <style media="screen">
+      body {
+        background: #F2F2F2;
+        margin: 0;
+      }
+
+      #app {
+        max-width: 300px;
+        max-height: 300px;
+        overflow: auto;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .media {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .media-figure {
+        margin-right: .5rem;
+      }
+
+      .media-body {
+        flex: 1;
+      }
+
+      .upload {
+        outline: none;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        line-height: 24px;
+        color: black;
+      }
+
+      .upload:hover {
+        background-color: #6F6F72;
+        color: white;
+      }
+
+      .upload img {
+        max-height: 24px;
+      }
+    </style>
   </head>
   <body>
+    <div id="app" class="py1">
+    </div>
+
     <script src="dist/popup-bundle.js" charset="utf-8"></script>
   </body>
 </html>
