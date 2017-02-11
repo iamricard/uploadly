@@ -23,7 +23,7 @@ const makeBundler = (path, wrapper = id, opts = {}) => {
       .pipe(buffer())
       .pipe(gulp.dest('./extension/dist'));
 
-  bundler.transform(envify);
+  bundler.transform(envify.bind(envify, process.env));
   bundler.on('update', bundle);
   bundler.on('log', gutil.log);
 

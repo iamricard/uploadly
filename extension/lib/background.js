@@ -1,3 +1,5 @@
+const storage = require('./storage');
+
 const input = document.createElement('input');
 document.body.appendChild(input);
 
@@ -27,6 +29,12 @@ You may click on this notification to open the image in a new tab <3
     title: 'Image uploaded!',
     isClickable: true,
     message
+  });
+
+  storage.add({
+    id,
+    link,
+    thumbnail: `http://i.imgur.com/${id}s.jpg`
   });
 
   chrome.notifications.onClicked.addListener(notificationId => {
