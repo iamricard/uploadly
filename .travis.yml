@@ -1,9 +1,9 @@
-language: bash
-
+language: node_js
+node_js:
+  - "6"
 addons:
   apt:
     packages:
       - jq
-
 script:
   - ./publish

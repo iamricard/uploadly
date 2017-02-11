@@ -24,7 +24,9 @@ imgur upload will be in your clipboard.
 
 * **~~Upload to your profile~~**: Coming soon!
 
-* **~~Keep track of your uploads~~**: Coming soon!
+* **Keep track of your uploads**: Click on the extension icon and you will
+be able to see all the pictures you've previously uploaded! Across different
+computers too!
 
 ## Installation
 
