@@ -7,11 +7,11 @@ const watchify = require('watchify');
 const envify = require('envify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
+const es = require('event-stream');
 
-const id = x => x;
-const makeBundler = (path, wrapper = id, opts = {}) => {
+const makeBundler = (file, wrapper, opts = {}) => {
   const options = Object.assign({}, opts, {
-    entries: `./extension/lib/${path}.js`
+    entries: `./extension/lib/${file}.js`
   });
   const bundler = wrapper(browserify(options));
 
@@ -19,7 +19,7 @@ const makeBundler = (path, wrapper = id, opts = {}) => {
     bundler
       .bundle()
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-      .pipe(source(`${path}-bundle.js`))
+      .pipe(source(`${file}-bundle.js`))
       .pipe(buffer())
       .pipe(gulp.dest('./extension/dist'));
 
@@ -27,14 +27,13 @@ const makeBundler = (path, wrapper = id, opts = {}) => {
   bundler.on('update', bundle);
   bundler.on('log', gutil.log);
 
-  return bundle;
+  return bundle();
 };
 
-const watch = path => makeBundler(path, watchify, watchify.args);
+const watch = file => makeBundler(file, watchify, watchify.args);
 
-gulp.task('watch:background', watch('background'));
-gulp.task('watch:popup', watch('popup'));
-gulp.task('compile:background', makeBundler('background'));
-gulp.task('compile:popup', makeBundler('popup'));
-gulp.task('compile', ['compile:background', 'compile:popup']);
-gulp.task('default', ['watch:background', 'watch:popup']);
+gulp.task('watch', () =>
+  es.merge(['background', 'popup'].map(watch)));
+gulp.task('compile', () =>
+  es.merge(['background', 'popup'].map((f) => makeBundler(f, (x) => x))));
+gulp.task('default', ['watch']);
