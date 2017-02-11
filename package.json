@@ -4,8 +4,8 @@
   "scripts": {
     "prettier": "prettier --write --single-quote extension/**/*.js",
     "clean": "rm -rf extension/dist && mkdir -p extension/dist",
-    "watch": "npm run clean && watchify -t localenvify extension/lib/app.js -o extension/dist/app.js -v",
-    "compile": "npm run clean && browserify extension/lib/app.js -o extension/dist/app.js"
+    "watch": "npm run clean && gulp",
+    "compile": "npm run clean && gulp compile"
   },
   "repository": {
     "type": "git",
@@ -22,13 +22,12 @@
     "browserify": "^14.0.0",
     "dotenv": "^4.0.0",
     "envify": "^4.0.0",
-    "localenvify": "^1.0.1",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.2",
+    "gulp-util": "^3.0.8",
     "prettier": "^0.16.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
-  },
-  "browserify": {
-    "transform": [
-      "envify"
-    ]
   }
 }
