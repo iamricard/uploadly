@@ -8,7 +8,7 @@ const envify = require('envify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 
-const id = (x) => x
+const id = x => x;
 const makeBundler = (path, wrapper = id, opts = {}) => {
   const options = Object.assign({}, opts, {
     entries: `./extension/lib/${path}.js`
@@ -30,9 +30,11 @@ const makeBundler = (path, wrapper = id, opts = {}) => {
   return bundle;
 };
 
-const watch = path => makeBundler(path, watchify, watchify.args)
+const watch = path => makeBundler(path, watchify, watchify.args);
 
 gulp.task('watch:background', watch('background'));
-gulp.task('compile:background', makeBundler('background'))
-gulp.task('compile', ['compile:background']);
-gulp.task('default', ['watch:background']);
+gulp.task('watch:popup', watch('popup'));
+gulp.task('compile:background', makeBundler('background'));
+gulp.task('compile:popup', makeBundler('popup'));
+gulp.task('compile', ['compile:background', 'compile:popup']);
+gulp.task('default', ['watch:background', 'watch:popup']);
