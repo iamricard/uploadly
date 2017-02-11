@@ -1,9 +1,20 @@
 const bel = require('bel');
 const storage = require('./storage');
+const clipboard = require('./clipboard')
 const app = document.getElementById('app');
 
-const viewClipboard = () => bel`
-  <div class='action'>
+const handleClipboardClick = (srcURL, thumbnail) => () => {
+  clipboard.write(srcURL)
+  chrome.notifications.create(srcURL, {
+    type: 'basic',
+    iconUrl: thumbnail,
+    title: 'Copied to clipboard :)',
+    message: ''
+  })
+}
+
+const viewClipboard = (srcURL, thumbnail) => bel`
+  <div onclick=${handleClipboardClick(srcURL, thumbnail)} class='action'>
     <i class='material-icons'>content_copy</i>
     Copy to Clipboard
   </div>
@@ -16,21 +27,21 @@ const viewOpen = () => bel`
   </div>
 `;
 
-const viewThumbnail = (title, src) => bel`
-  <img class='media-figure' src=${src} alt='Thumbnail for ${title}' />
+const viewThumbnail = (src) => bel`
+  <img class='media-figure' src=${src} alt='thumbnail for imgur upload' />
 `;
 
-const viewBody = (text, src) => bel`
+const viewBody = (src, thumbnail) => bel`
   <div class='media-body'>
     ${viewOpen()}
-    ${viewClipboard()}
+    ${viewClipboard(src, thumbnail)}
   </div>
 `;
 
 const viewUpload = u => bel`
   <div class='media upload'>
-    ${viewThumbnail(u.id, u.thumbnail)}
-    ${viewBody(u.id, u.link)}
+    ${viewThumbnail(u.thumbnail)}
+    ${viewBody(u.link, u.thumbnail)}
   </div>
 `;
 
