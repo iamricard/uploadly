@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const { exec } = require('child_process');
+const bumpType = process.argv[2];
+const FILES = ['./package.json', './extension/manifest.json'].map(filename => ({
+  filename,
+  content: require(filename)
+}));
+
+const bump = v => {
+  const [major, minor, patch] = v.split('.').map(Number);
+
+  if (bumpType === 'major') {
+    return [major + 1, 0, 0].join('.');
+  } else if (bumpType === 'minor') {
+    return [major, minor + 1, 0].join('.');
+  } else {
+    return [major, minor, patch + 1].join('.');
+  }
+};
+
+const version = bump(FILES[0].content.version);
+
+FILES.forEach(({ filename, content }) => {
+  fs.writeFileSync(
+    filename,
+    JSON.stringify(Object.assign({}, content, { version }), null, 2)
+  );
+});
+
+exec(
+  `git add ${FILES.map(({ filename }) => filename).join(
+    ' '
+  )} && git commit -m "publish: version ${version}"`
+);

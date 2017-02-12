@@ -5,7 +5,8 @@
     "prettier": "prettier --write --single-quote extension/**/*.js",
     "clean": "rm -rf extension/dist && mkdir -p extension/dist",
     "watch": "npm run clean && gulp",
-    "compile": "npm run clean && gulp compile"
+    "compile": "npm run clean && gulp compile",
+    "bump": "./bump $BUMP"
   },
   "repository": {
     "type": "git",
