@@ -36,15 +36,12 @@ body {
   height: 32px;
   color: black;
   width: 100%;
-}
-
-.upload:hover {
-  background-color: #6F6F72;
-  color: white;
+  color: #5A5A5A;
 }
 
 .upload .media-body {
   display: flex;
+  justify-content: space-between;
 }
 
 .upload .media-figure {
@@ -52,12 +49,17 @@ body {
 }
 
 .action {
-  flex: auto;
   cursor: pointer;
   display: flex;
+  padding: 0 .5rem;
+  border-radius: 3px;
 }
 
-.action i {
+.action:hover {
+  background-color: #D5D5D5;
+}
+
+.action .material-icons {
   line-height: 32px;
   font-size: 18px;
   margin-right: .5rem;
