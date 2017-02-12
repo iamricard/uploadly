@@ -20,8 +20,10 @@ const viewClipboard = (srcURL, thumbnail) => bel`
   </div>
 `;
 
-const viewOpen = () => bel`
-  <div class='action'>
+const handleOpenClick = url => () => chrome.tabs.create({ url });
+
+const viewOpen = srcURL => bel`
+  <div onclick=${handleOpenClick(srcURL)} class='action'>
     <i class="material-icons">open_in_new</i>
     Open
   </div>
@@ -33,7 +35,7 @@ const viewThumbnail = src => bel`
 
 const viewBody = (src, thumbnail) => bel`
   <div class='media-body'>
-    ${viewOpen()}
+    ${viewOpen(src)}
     ${viewClipboard(src, thumbnail)}
   </div>
 `;
