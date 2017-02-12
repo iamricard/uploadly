@@ -1,6 +1,6 @@
 {
   "name": "uploadly",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
     "prettier": "prettier --write --single-quote extension/**/*.js",
     "clean": "rm -rf extension/dist && mkdir -p extension/dist",
