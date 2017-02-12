@@ -59,7 +59,7 @@ guidelines.
 
 ### Up and running
 
-Make sure you have [node] and [npm] installed. We recommend you use [nvm] to
+Make sure you have [nodejs] and [npm] installed. We recommend you use [nvm] to
 install them if you haven't installed them yet. When that is done, copy or type
 the following steps in your terminal:
 
