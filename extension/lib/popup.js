@@ -1,17 +1,17 @@
 const bel = require('bel');
 const storage = require('./storage');
-const clipboard = require('./clipboard')
+const clipboard = require('./clipboard');
 const app = document.getElementById('app');
 
 const handleClipboardClick = (srcURL, thumbnail) => () => {
-  clipboard.write(srcURL)
+  clipboard.write(srcURL);
   chrome.notifications.create(srcURL, {
     type: 'basic',
     iconUrl: thumbnail,
     title: 'Copied to clipboard :)',
     message: ''
-  })
-}
+  });
+};
 
 const viewClipboard = (srcURL, thumbnail) => bel`
   <div onclick=${handleClipboardClick(srcURL, thumbnail)} class='action'>
@@ -27,7 +27,7 @@ const viewOpen = () => bel`
   </div>
 `;
 
-const viewThumbnail = (src) => bel`
+const viewThumbnail = src => bel`
   <img class='media-figure' src=${src} alt='thumbnail for imgur upload' />
 `;
 

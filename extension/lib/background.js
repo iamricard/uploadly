@@ -1,5 +1,5 @@
 const api = require('./api');
-const clipboard = require('./clipboard')
+const clipboard = require('./clipboard');
 const storage = require('./storage');
 
 function handleAnonClick({ srcUrl }, tab) {
